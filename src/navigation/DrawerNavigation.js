@@ -11,8 +11,8 @@ const Drawer = createDrawerNavigator();
 function Feed()
 {
     return(
-        <View>
-            <Text>Feed Screen</Text>
+        <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
+            <Text style={{fontSize:30,color:'purple',fontWeight:'bold'}}>Feed Screen</Text>
         </View>
     )
 }
@@ -21,8 +21,8 @@ function Feed()
 function WiFi()
 {
     return(
-        <View>
-            <Text>Wi-Fi</Text>
+        <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
+            <Text style={{fontSize:30,color:'purple',fontWeight:'bold'}}>Wi-Fi</Text>
         </View>
     )
 }
@@ -30,8 +30,8 @@ function WiFi()
 function Seeting()
 {
     return(
-        <View>
-            <Text>Setting</Text>
+        <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
+            <Text style={{fontSize:30,color:'purple',fontWeight:'bold'}}>Setting</Text>
         </View>
     )
 }
@@ -39,8 +39,8 @@ function Seeting()
 function Dual_SIMs()
 {
     return(
-        <View>
-            <Text>Dual SIMS and Mobile Network</Text>
+        <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
+            <Text style={{fontSize:30,color:'purple',fontWeight:'bold'}}>Dual SIMS and Mobile Network</Text>
         </View>
     )
 }
@@ -48,8 +48,8 @@ function Dual_SIMs()
 function System()
 {
     return(
-        <View>
-            <Text>System Updated</Text>
+        <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
+            <Text style={{fontSize:30,color:'purple',fontWeight:'bold'}}>System Updated</Text>
         </View>
     )
 }
@@ -57,8 +57,8 @@ function System()
 function Security()
 {
     return(
-        <View>
-            <Text>Security</Text>
+        <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
+            <Text style={{fontSize:30,color:'purple',fontWeight:'bold'}}>Security</Text>
         </View>
     )
 }
@@ -66,8 +66,8 @@ function Security()
 function Privacy()
 {
     return(
-        <View>
-            <Text>Privacy</Text>
+        <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
+            <Text style={{fontSize:30,color:'purple',fontWeight:'bold'}}>Privacy</Text>
         </View>
     )
 }
@@ -75,8 +75,8 @@ function Privacy()
 function Battery()
 {
     return(
-        <View>
-            <Text>Battery</Text>
+        <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
+            <Text style={{fontSize:30,color:'purple',fontWeight:'bold'}}>Battery</Text>
         </View>
     )
 }
