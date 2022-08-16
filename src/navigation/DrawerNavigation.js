@@ -40,7 +40,7 @@ function Dual_SIMs()
 {
     return(
         <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
-            <Text style={{fontSize:30,color:'purple',fontWeight:'bold'}}>Dual SIMS and Mobile Network</Text>
+            <Text style={{fontSize:30,color:'purple',fontWeight:'bold'}}>Dual SIMS and Mobile Networks</Text>
         </View>
     )
 }
