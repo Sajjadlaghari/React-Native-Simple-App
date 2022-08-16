@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useFunctionalOrientation } from '../../utility/responsiveUtil'
 import ResponsiveStyle from './styles/styles';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 function Home(props) {

@@ -17,6 +17,7 @@ import Signup from '../screens/Signup/Signup';
 import User from '../screens/User/User';
 import TabNavigation from './TabNavigation'; 
 import Details from '../screens/details/details';
+import DrawerNavigation from './DrawerNavigation';
  const Stack = createStackNavigator();
  
  const RootNavigation = (props) => {
@@ -35,6 +36,7 @@ import Details from '../screens/details/details';
        <Stack.Screen name="User" component={User} />
        <Stack.Screen name="TabNavigation" component={TabNavigation} />
        <Stack.Screen name="Details" component={Details} />
+       <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
      </Stack.Navigator>
      </NavigationContainer>
      
