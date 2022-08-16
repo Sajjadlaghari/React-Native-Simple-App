@@ -1,31 +1,33 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image, InteractionManager, Dimensions } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import {useFunctionalOrientation} from '../../utility/responsiveUtil'
+import { useFunctionalOrientation } from '../../utility/responsiveUtil'
 import ResponsiveStyle from './styles';
 
-const {width,height } =Dimensions.get('screen')
+const { width, height } = Dimensions.get('screen')
+
+const data = new Array(12).fill({ id: 1 })
 function User(props) {
   const { styles, isPortrait, heightToDp, widthToDp } = useFunctionalOrientation(ResponsiveStyle);
 
-    const [userData,setUserData]=useState();
-    const [isLoaded,setIsLoaded]=useState(true);
+  const [userData, setUserData] = useState();
+  const [isLoaded, setIsLoaded] = useState(true);
 
-        
-useEffect(() => {
+
+  useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then((response) => response.json())
       .then((response) => {
         setUserData(response)
         //  console.log(response)
-        }
-      )     
+      }
+      )
   }, []);
 
 
-    return (
-        <View style={styles.container}>
-
+  return (
+    <View style={styles.container}>
+      {/* 
               <FlatList 
             data ={userData}
             renderItem={({item,index})=>{
@@ -37,11 +39,25 @@ useEffect(() => {
                     </View>
                 )
             }}
-              />
+              /> */}
 
-            </View>
 
-    );
+
+      {data.map((item, index) => {
+        <TouchableOpacity style={styles.user}
+        
+        key={index}
+        >
+          <Image resizeMode='contain' style={styles.image} source={{ uri: 'https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg' }} />
+          <Text style={styles.text}>{item}Name :Sajjad Hussain</Text>
+          <Text style={styles.text}>Email : sajjad123@gmail.com</Text>
+        </TouchableOpacity>
+      })}
+
+      
+    </View>
+
+  );
 }
 
 export default User;

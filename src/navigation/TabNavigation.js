@@ -8,7 +8,8 @@ import Chats from '../screens/Chats/Chats';
 import MyAds from '../screens/MyAds/MyAds'
 import Account from '../screens/Accounts/Account'
 import Sell from '../screens/Sell/Sell';
-import Icon from 'react-native-vector-icons/AntDesign'
+import Icon from 'react-native-vector-icons/Ionicons'
+
 
 
 const Tab = createBottomTabNavigator();
@@ -25,17 +26,19 @@ function TabNavigation(props) {
         >
             <Tab.Screen name="Home" component={OlxHome}
                 options={{
-                    // tabBarIcon: () =>
-                    // (
-                    //     // <Icon name="Home" size={30} color="#900" />
-                    // )
+                    tabBarIcon: () =>
+                    (
+
+                        <Icon    name="mail-outline"                      
+                        />
+                    )
                 }}
             />
             <Tab.Screen name="Chats" component={Chats}
                 options={{
                     tabBarIcon: () =>
                     (
-                        <Icon name="wechat" size={30} color="#900" />
+                        <Icon name="home-outline" size={30} color="#900" />
                     )
                 }}
             />
@@ -44,6 +47,7 @@ function TabNavigation(props) {
                 options={{
                     // tabBarIcon: () =>
                     // (
+                    //     <Icon name='plus' size={30} color='#777' />
                     //     // <Icon name="person" size={30} color="#900" />
                     // )
                 }}

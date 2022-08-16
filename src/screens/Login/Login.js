@@ -6,8 +6,9 @@ import ResponsiveStyle from './styles';
 
 function Login(props) {
     const { styles, isPortrait, heightToDp, widthToDp } = useFunctionalOrientation(ResponsiveStyle);
-
+//    alert(props?.route?.params?.id)
     return (
+
         <View style={styles.container}>
 
             <Text style={styles.headerText}>Welcome To App</Text>
@@ -35,7 +36,7 @@ function Login(props) {
                     
                     <TouchableOpacity style={styles.Signup}
                        onPress={() => {
-                        props. navigation.navigate('Signup')
+                        props.navigation.navigate('Signup')
                     }}
                     >
                         <Text style={{ textAlign: 'center', color: '#4FC1F9', fontSize: 18, fontWeight: 'bold' }}>Sign Up</Text>
