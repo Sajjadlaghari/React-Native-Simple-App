@@ -8,7 +8,7 @@ import ResponsiveStyle from './styles';
 
 const { width, height } = Dimensions.get('screen')
 
-const data = new Array(5).fill({ id: 1 })
+const data = new Array(25).fill({ id: 1 })
 const data1 = new Array(2).fill({ id: 1 })
 const data2 = new Array(2).fill({ id: 1 })
 function OlxHome(props) {
@@ -32,23 +32,29 @@ function OlxHome(props) {
   return (
     <ScrollView>
       <View style={styles.container}>
-        {data.map((item, index) => {
-          return (
-            <TouchableOpacity style={styles.innerView}
-              onPress={() => {
-                props.navigation.navigate('Details', { id: item.id })
-              }
-              }
-              key={index}
-            >
-              <Image style={styles.image} resizeMode="contain" source={{ uri: 'https://carzclan.com/wp-content/uploads/2021/06/1.Toyota-200-Series-Land-Cruiser-SCL-Global.jpg' }} />
-              <Text style={{ flexWrap: 'wrap', width: 160, marginBottom: 5, marginTop: 7, marginLeft: 4 }}>Tables with Chairs</Text>
-              <Text style={{ fontWeight: 'bold', marginBottom: 5, marginLeft: 4 }}>RS 1300</Text>
-              <Text style={{ marginBottom: 5, marginLeft: 4, fontSize: 12 }}>Karachi University Road</Text>
-            </TouchableOpacity>
-          )
-        })}
-       </View>
+        <View style={{ flex: 1, backgroundColor:'#fff' }}>
+          <View style={{flex:1,elevation:10,padding:10,width:'100%',flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between',}}>
+            {data.map((item, index) => {
+              return (
+                <TouchableOpacity style={{padding:10,elevation:5,backgroundColor:'#fff',marginTop:15,borderRadius:10}}
+                  onPress={() => {
+                    props.navigation.navigate('Details', { id: item.id })
+                  }
+                  }
+                  key={index}
+                >
+                    <Image style={styles.image}  resizeMode="contain" source={{ uri: 'https://carzclan.com/wp-content/uploads/2021/06/1.Toyota-200-Series-Land-Cruiser-SCL-Global.jpg' }} />
+                    <Text >Tables with Chairs</Text>
+                    <Text >RS 1300</Text>
+                    <Text >Karachi University Road</Text>
+                </TouchableOpacity>
+              )
+            })}
+          </View>
+          <View>
+          </View>
+        </View>
+      </View>
     </ScrollView>
   );
 }

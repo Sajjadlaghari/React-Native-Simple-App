@@ -48,33 +48,33 @@ function Details(props) {
         </View>
         </View>
 
-         <View style={{flexDirection:'row',justifyContent:'space-around'}}>
-          <View style={{width:280}}>
-            <Text style={{fontSize:16,marginLeft:10,fontWeight:'bold'}}>Details</Text>
-            <Text style={{fontSize:14,marginTop:6,marginLeft:10}}>Year</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>KM's Driven</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>Make</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>Model</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>Fuel</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>Registration City</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>Car Document</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>Assembly</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>Condition</Text>
+        <View style={{width:'100%',padding:20,flexDirection:'row',justifyContent:'space-between'}}>
+          <View>
+            <Text style={{fontSize:20,fontWeight:'bold'}}>Details</Text>
+            <Text style={{fontSize:12,fontWeight:'bold'}}>Year</Text>
+            <Text style={{fontSize:12,fontWeight:'bold'}}>KM's Driven</Text>
+            <Text style={{fontSize:12,fontWeight:'bold'}}>Make</Text>
+            <Text style={{fontSize:12,fontWeight:'bold'}}>Model</Text>
+            <Text style={{fontSize:12,fontWeight:'bold'}}>Fuel</Text>
+            <Text style={{fontSize:12,fontWeight:'bold'}}>Registration City</Text>
+            <Text style={{fontSize:12,fontWeight:'bold'}}>Car Document</Text>
+            <Text style={{fontSize:12,fontWeight:'bold'}}>Assembly</Text>
+            <Text style={{fontSize:12,fontWeight:'bold'}}>Condition</Text>
           </View>
           <View>
-          <Text style={{fontSize:14,marginTop:6,marginLeft:10}}></Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>2018</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>73,000</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>Toyota</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>Aqua</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>Hybrid</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>Karachi</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>Orignal</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>Imported</Text>
-            <Text style={{fontSize:14,marginTop:6, marginLeft:10}}>Used</Text>
+            <Text style={{fontSize:14,fontWeight:'bold'}}></Text>
+            <Text style={{fontSize:14,fontWeight:'bold'}}>2018</Text>
+            <Text style={{fontSize:14,fontWeight:'bold'}}>73,000</Text>
+            <Text style={{fontSize:14,fontWeight:'bold'}}>Toyota</Text>
+            <Text style={{fontSize:14,fontWeight:'bold'}}>Aqua</Text>
+            <Text style={{fontSize:14,fontWeight:'bold'}}>Hybrid</Text>
+            <Text style={{fontSize:14,fontWeight:'bold'}}>Karachi</Text>
+            <Text style={{fontSize:14,fontWeight:'bold'}}>Orignal</Text>
+            <Text style={{fontSize:14,fontWeight:'bold'}}>Imported</Text>
+            <Text style={{fontSize:14,fontWeight:'bold'}}>Used</Text>
           </View>
-         </View>
-         <View>
+        </View>
+         <View style={{padding:12,marginTop:-30}}>
           <Text style={{fontSize:15,marginLeft:10,fontWeight:'bold'}}>Description</Text>
           <Text style={{width:340,marginLeft:10,}}>Toyota Aqua</Text>
           <Text style={{width:340,marginLeft:10}}>Model 2018</Text>

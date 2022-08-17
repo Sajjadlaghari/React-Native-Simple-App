@@ -11,6 +11,8 @@ export default portraitStyles = (w, h) => {
             flexDirection: 'row',
             marginTop:15,
             flex: 1,
+            width:'100%',
+            justifyContent:'space-between',
             flexWrap: 'wrap',
             elevation:2,
 

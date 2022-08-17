@@ -6,7 +6,7 @@ import ResponsiveStyle from './styles';
 
 const { width, height } = Dimensions.get('screen')
 
-const data = new Array(12).fill({ id: 1 })
+const data = new Array(12).fill(1)
 function User(props) {
   const { styles, isPortrait, heightToDp, widthToDp } = useFunctionalOrientation(ResponsiveStyle);
 
@@ -45,7 +45,6 @@ function User(props) {
 
       {data.map((item, index) => {
         <TouchableOpacity style={styles.user}
-        
         key={index}
         >
           <Image resizeMode='contain' style={styles.image} source={{ uri: 'https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg' }} />
