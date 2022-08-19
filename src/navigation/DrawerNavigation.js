@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Text, StyleSheet, Image, ImageBackground, Alert, ActivityIndicator } from 'react-native';
+import { View, FlatList, Text, Pressable,StyleSheet,Modal, Image, ImageBackground, Alert, ActivityIndicator } from 'react-native';
 import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import IconAntDesign from 'react-native-vector-icons/AntDesign'
@@ -176,6 +176,9 @@ function Dual_SIMs() {
 
 function User(props) {
 
+
+  const [modalVisible, setModalVisible] = useState(false);
+
     const [isLoading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [confirm, setConfirm] = useState([]);
@@ -237,7 +240,7 @@ function User(props) {
                             // Displaying results to console
                             .then(json => {
                                 if (json.status) {
-                                    alert('Record Deleted')
+                                    setModalVisible(true)
                                     API();
                                 } else {
                                     alert('Record Not Deleted')
@@ -306,6 +309,33 @@ function User(props) {
                         renderItem={renderItem}
                     />
             }
+
+
+
+<Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.main}>
+          <View style={styles.modalView}>
+            
+            <Text style={[styles.modalText,{color:'#000'}]}>Record Delete successfully</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={()=>{
+                setModalVisible(false)
+              }}
+            >
+              <Text style={styles.textStyle}>OK</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
         </View>
     )
 }
@@ -471,7 +501,37 @@ const styles = StyleSheet.create({
         height: 85,
         width: 65,
         borderRadius: 1,
-    }
+    },
+    main:
+    {
+        flex:1,
+        width:'100%',
+        height:200,
+        marginLeft:-90
+    },
+    modalText:
+    {
+       fontSize:24,
+       justifyContent:'center',
+    },
+    textStyle:
+    {
+        fontSize:20,
+        color:'purple',
+        marginTop:20,
+    }, 
+    modalView:
+    {
+       width:300,
+       height:150,
+       justifyContent:"center",
+       alignItems:'center',
+       borderRadius:10,
+       marginTop:260,
+       marginLeft:120,
+       backgroundColor:'#fff',
+       elevation:8,
+    },
 
 })
 export default DrawerNavigation;

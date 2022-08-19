@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet,onLongPress, TouchableOpacity, Image, InteractionManager, Dimensions } from 'react-native';
+import { Text, View, StyleSheet, Modal, Pressable, onLongPress, PermissionsAndroid, TouchableOpacity, Image, InteractionManager, Dimensions } from 'react-native';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import { useFunctionalOrientation } from '../../utility/responsiveUtil'
 import ResponsiveStyle from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import { lunchCamera } from 'react-native-image-picker';
+import LottieView from 'lottie-react-native';
 
-const { width, height } = Dimensions.get('screen')
+const { width, height } = Dimensions.get('screen');
 
-const data = new Array(12).fill(1)
+
+
+
 function Add_User(props) {
   const { styles, isPortrait, heightToDp, widthToDp } = useFunctionalOrientation(ResponsiveStyle);
 
+  const [modalVisible, setModalVisible] = useState(false);
   const [userData, setUserData] = useState();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [address, setAddress] = useState();
   const [age, setAge] = useState();
 
+  const [filePath, setFilePath] = useState({});
 
   const Add = (data) => {
 
@@ -37,7 +43,7 @@ function Add_User(props) {
       // Displaying results to console
       .then(json => {
         if (json.status) {
-          alert('User Added Successfully',props.navigation.goBack())
+          setModalVisible(true);
         } else {
           alert('User Not Added')
         }
@@ -62,7 +68,7 @@ function Add_User(props) {
         <View>
           <TouchableOpacity
 
-     
+
 
             onPress={() => {
               Add({ name, email, address, age })
@@ -74,7 +80,7 @@ function Add_User(props) {
       </View>
       <View style={{ flex: 1, width: '100%', marginTop: 1, padding: 10 }}>
 
-        <Text style={{ textAlign: 'center', backgroundColor: 'purple', height: 50, fontSize: 30, fontWeight: 'bold', color: '#fff' }}>Add New User</Text>
+        {/* <Text style={{ textAlign: 'center', backgroundColor: 'purple', height: 50, fontSize: 30, fontWeight: 'bold', color: '#fff' }}>Add New User</Text> */}
         <View style={{ width: 300, padding: 10, height: 3 }}><Text></Text></View>
         <TextInput
           style={{ borderWidth: 1, marginTop: 8 }}
@@ -85,7 +91,7 @@ function Add_User(props) {
           style={{ borderWidth: 1, marginTop: 9 }}
           placeholder="Enter Your Email  Here"
 
-         
+
           onChangeText={(text) => setEmail(text)}
 
         />
@@ -100,9 +106,35 @@ function Add_User(props) {
           style={{ borderWidth: 1, marginTop: 9 }}
           onChangeText={(text) => setAge(text)}
           placeholder="Enter Your Age  Here"
-
         />
       </View>
+
+
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(false);
+        }}
+      >
+        <View style={styles.main}>
+          <View style={styles.modalView}>
+            
+            <Text style={styles.modalText}>Data Added successfully</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => {
+                props.navigation.goBack()
+              }}
+            >
+              <Text style={styles.textStyle}>OK</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </View>
 
   );
