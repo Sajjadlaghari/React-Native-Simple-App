@@ -8,20 +8,19 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 const { width, height } = Dimensions.get('screen')
 
 const data = new Array(12).fill(1)
-function User_Details(props) {
-  const item = props.route.params.item;
+function Add_User(props) {
   const { styles, isPortrait, heightToDp, widthToDp } = useFunctionalOrientation(ResponsiveStyle);
 
   const [userData, setUserData] = useState();
-  const [name, setName] = useState(item.name);
-  const [email, setEmail] = useState(item.email);
-  const [address, setAddress] = useState(item.address);
-  const [age, setAge] = useState(item.age);
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [address, setAddress] = useState();
+  const [age, setAge] = useState();
 
 
-  const update = (data, id) => {
+  const Add = (data) => {
 
-    fetch("http://192.168.18.8:8000/api/update_employee/" + id, {
+    fetch("http://192.168.18.8:8000/api/add_employee/", {
 
       method: "POST",
       body: JSON.stringify(data),
@@ -38,9 +37,9 @@ function User_Details(props) {
       // Displaying results to console
       .then(json => {
         if (json.status) {
-          alert('Data Updated',props.navigation.goBack())
+          alert('User Added Successfully',props.navigation.goBack())
         } else {
-          alert('Data Not Updated')
+          alert('User Not Added')
         }
       })
       .catch(error => console.log(error))
@@ -66,38 +65,42 @@ function User_Details(props) {
      
 
             onPress={() => {
-              update({ name, email, address, age }, item.id)
+              Add({ name, email, address, age })
             }}
           >
-            <Text style={{ color: '#fff' }}>Update</Text>
+            <Text style={{ color: '#fff' }}>Save</Text>
           </TouchableOpacity>
         </View>
       </View>
       <View style={{ flex: 1, width: '100%', marginTop: 1, padding: 10 }}>
 
-        <Text style={{ textAlign: 'center', backgroundColor: 'purple', height: 50, fontSize: 30, fontWeight: 'bold', color: '#fff' }}>User Information</Text>
+        <Text style={{ textAlign: 'center', backgroundColor: 'purple', height: 50, fontSize: 30, fontWeight: 'bold', color: '#fff' }}>Add New User</Text>
         <View style={{ width: 300, padding: 10, height: 3 }}><Text></Text></View>
         <TextInput
           style={{ borderWidth: 1, marginTop: 8 }}
-          value={name}
           onChangeText={(text) => setName(text)}
+          placeholder="Enter Your Name  Here"
         />
         <TextInput
           style={{ borderWidth: 1, marginTop: 9 }}
-          value={email}
+          placeholder="Enter Your Email  Here"
+
+         
           onChangeText={(text) => setEmail(text)}
 
         />
         <TextInput
           style={{ borderWidth: 1, marginTop: 9 }}
-          value={address}
           onChangeText={(text) => setAddress(text)}
+          placeholder="Enter Your Address  Here"
+
 
         />
         <TextInput
           style={{ borderWidth: 1, marginTop: 9 }}
-          value={age}
           onChangeText={(text) => setAge(text)}
+          placeholder="Enter Your Age  Here"
+
         />
       </View>
     </View>
@@ -105,4 +108,4 @@ function User_Details(props) {
   );
 }
 
-export default User_Details;
+export default Add_User;

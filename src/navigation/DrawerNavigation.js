@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Text,StyleSheet ,Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { View, FlatList, Text, StyleSheet, Image, ImageBackground, Alert, ActivityIndicator } from 'react-native';
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import IconAntDesign from 'react-native-vector-icons/AntDesign'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -176,52 +176,137 @@ function Dual_SIMs() {
 
 function User(props) {
 
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(false);
     const [data, setData] = useState([]);
+    const [confirm, setConfirm] = useState([]);
 
     // console.log(data);
 
-    useEffect(() => {
+
+    useFocusEffect(
+        React.useCallback(() => {
+            API();
+        }, [])
+    );
+
+    const API = () => {
+        setLoading(true)
         fetch('http://192.168.18.8:8000/api/get_employee')
             .then((response) => response.json())
             .then((json) => {
                 //  console.log(JSON.stringify(json,null,2))
                 setData(json)
-
+                setLoading(false)
+            })
+            .catch((error) => {
+                setLoading(false)
+                console.error(error)
             })
 
-            .catch((error) => console.error(error))
-    }, []);
+    }
+
+    const del = (id) => {
+
+        Alert.alert(
+            "Confirm",
+            "Are You Sure Do you Want Do Delete",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                {
+                    text: "OK", onPress: () =>
+
+
+                        fetch("http://192.168.18.8:8000/api/delete_employee/" + id, {
+
+                            method: "DELETE",
+                            // body: JSON.stringify(data),
+
+                            // Adding headers to the request
+                            headers: {
+                                "Content-type": "application/json; charset=UTF-8"
+                            },
+                            credentials: 'same-origin'
+                        })
+                            // Converting to JSON
+                            .then(response => response.json())
+
+                            // Displaying results to console
+                            .then(json => {
+                                if (json.status) {
+                                    alert('Record Deleted')
+                                    API();
+                                } else {
+                                    alert('Record Not Deleted')
+                                }
+                            })
+                            .catch(error => console.log(error))
+                }
+            ]
+        );
+
+
+    }
 
     const renderItem = ({ item }) => (
         <View style={{ flex: 1 }}>
-            <TouchableOpacity style={{ width: '100%', flexDirection: 'row',marginTop:8,paddingLeft:10, backgroundColor: '#fff' }}
-            onPress={()=>{
-                props.navigation.navigate('User_Details',{item:item});
-            }}
-            >
-                <Image style={styles.image} source={{ uri: 'https://media.istockphoto.com/photos/mature-mixed-race-business-man-picture-id1059661424?k=20&m=1059661424&s=612x612&w=0&h=CLL4tto10GPo1gtMR9c-kPmf8VkvodjvTyqvtEuTLtg=' }} />
-                <View style={{flex:1,flexDirection:'row',justifyContent:'space-between'}}>
-                <View>
-                    <Text style={styles.text}>{item.name}</Text>
-                    <Text style={styles.text}>{item.email}</Text>
-                </View> 
-                <View>
-                    
-                    <Text style={styles.text}>
-                        <IconFontAwesome color={'black'} name='arrow-right' size={23}/>
-                    </Text>
-                </View>
-                </View>
-            </TouchableOpacity>
+            <ImageBackground style={{ width: '100%', height: '100%' }} source={{ uri: 'https://www.wallpaperflare.com/static/85/105/71/stains-light-dark-background-wallpaper.jpg' }}>
+                <TouchableOpacity style={{ width: '100%', flexDirection: 'row', marginTop: 8, paddingLeft: 4, backgroundColor: '#fff' }}
+                    onPress={() => {
+                        props.navigation.navigate('User_Details', { item: item });
+                    }}
 
+                    onLongPress={() => {
+                        del(item.id)
+                    }}
+                >
+                    <Image style={styles.image} source={{ uri: 'https://media.istockphoto.com/photos/mature-mixed-race-business-man-picture-id1059661424?k=20&m=1059661424&s=612x612&w=0&h=CLL4tto10GPo1gtMR9c-kPmf8VkvodjvTyqvtEuTLtg=' }} />
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <View>
+                            <Text style={styles.text}>Name: {item.name}</Text>
+                            <Text style={styles.text}>Email: {item.email}</Text>
+                        </View>
+                        <View>
+
+                            <Text style={[styles.text, { paddingTop: 25, paddingRight: 8 }]}>
+                                <IconFontAwesome color={'black'} name='arrow-right' size={19} />
+                            </Text>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            </ImageBackground>
         </View>
     )
     return (
-        <FlatList
-            data={data}
-            renderItem={renderItem}
-        />
+        <View style={{ width: '100%', flex: 1, }}>
+
+            <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'grey' }}>
+                <View>
+
+                </View>
+                <View>
+                    <TouchableOpacity style={{ backgroundColor: 'green', padding: 15 }}
+                        onPress={() => {
+                            props.navigation.navigate('Add_User')
+                        }}
+                    >
+                        <Text style={{ color: 'white', fontWeight: 'bold' }}>Add User</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            {
+                isLoading ?
+                    <ActivityIndicator style={{marginTop:'70%'}} color={'red'} size={70} />
+                    :
+                    <FlatList
+                        data={data}
+                        renderItem={renderItem}
+                    />
+            }
+        </View>
     )
 }
 
@@ -373,20 +458,19 @@ function DrawerNavigation() {
 }
 
 
-const styles=StyleSheet.create({
+const styles = StyleSheet.create({
     text:
     {
-        marginTop:7,
-        marginLeft:8,
-        fontSize:15,
-        color:'blue',
-        fontWeight:'bold'
+        marginTop: 7,
+        marginLeft: 8,
+        fontSize: 15,
+        color: 'black',
     },
     image:
     {
-        height:65,
-        width:65,
-        borderRadius:30,
+        height: 85,
+        width: 65,
+        borderRadius: 1,
     }
 
 })
