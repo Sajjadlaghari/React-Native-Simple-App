@@ -7,9 +7,26 @@ import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
+import {getUserListAction} from '../redux/actions/GetUserListActions'
+
+
+const mapStateToProps=(state)=>{
+    return {
+         UserList:state.UserList
+    }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+    return {
+         getUserList:()=>{
+            dispatch(getUserListAction())
+         }
+    }
+}
+
+
 const Drawer = createDrawerNavigator();
-
-
 
 function Seeting() {
     return (
@@ -176,8 +193,12 @@ function Dual_SIMs() {
 
 function User(props) {
 
-
+    // alert(JSON.stringify(props.userList,null,2))
   const [modalVisible, setModalVisible] = useState(false);
+
+
+
+
 
     const [isLoading, setLoading] = useState(false);
     const [data, setData] = useState([]);
@@ -188,25 +209,27 @@ function User(props) {
 
     useFocusEffect(
         React.useCallback(() => {
-            API();
+            // API();
+            props?.getUserList()
+            alert()
         }, [])
     );
 
-    const API = () => {
-        setLoading(true)
-        fetch('http://192.168.18.8:8000/api/get_employee')
-            .then((response) => response.json())
-            .then((json) => {
-                //  console.log(JSON.stringify(json,null,2))
-                setData(json)
-                setLoading(false)
-            })
-            .catch((error) => {
-                setLoading(false)
-                console.error(error)
-            })
+    // const API = () => {
+    //     setLoading(true)
+    //     fetch('http://192.168.18.8:8000/api/get_employee')
+    //         .then((response) => response.json())
+    //         .then((json) => {
+    //             //  console.log(JSON.stringify(json,null,2))
+    //             setData(json)
+    //             setLoading(false)
+    //         })
+    //         .catch((error) => {
+    //             setLoading(false)
+    //             console.error(error)
+    //         })
 
-    }
+    // }
 
     const del = (id) => {
 
@@ -407,17 +430,40 @@ function Battery() {
 }
 
 
-function DrawerNavigation() {
+function DrawerNavigation(props) {
+
+    //  useEffect(()=>{
+    //     props.getUserList();
+
+    // },[])
+
+    
+    
+    // alert(JSON.stringify(props.UserList,null,2))
+
     return (
+    
+    
         <Drawer.Navigator>
-            <Drawer.Screen name="User" component={User}
+            {/* <Drawer.Screen name="User" component={User}
                 options={{
                     drawerIcon: ({ focused, size }) => (
                         <IconFontAwesome size={33} name="user" />
 
                     )
                 }}
-            />
+            /> */}
+            <Drawer.Screen  name="User" 
+            options={{
+                drawerIcon: ({ focused, size }) => (
+                    <IconFontAwesome size={33} name="user" />
+
+                )
+            }}
+
+            >
+                {(props_)=>{<User {...props_ }getUserList={props?.getUserList} userList={props?.UserList}/>}}
+            </Drawer.Screen>
             <Drawer.Screen name="Seeting" component={Seeting}
                 options={{
                     drawerIcon: ({ focused, size }) => (
@@ -534,4 +580,4 @@ const styles = StyleSheet.create({
     },
 
 })
-export default DrawerNavigation;
+export default connect(mapStateToProps,mapDispatchToProps) (DrawerNavigation);

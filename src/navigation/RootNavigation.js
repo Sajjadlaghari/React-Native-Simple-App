@@ -33,13 +33,13 @@ import Add_User from '../screens/Add_User/Add_User';
             headerShown: false
           }}
         >
-       <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
        <Stack.Screen name="Home" component={Home} />
        <Stack.Screen name="Login" component={Login} initialParams={{id:1}}/>
        <Stack.Screen name="Signup" component={Signup} />
        <Stack.Screen name="User" component={User} />
        <Stack.Screen name="TabNavigation" component={TabNavigation} />
        <Stack.Screen name="User_Details" component={User_Details} />
+       <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
        {/* <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} /> */}
        <Stack.Screen name="Details" component={Details} />
        <Stack.Screen name="Add_User" component={Add_User} />

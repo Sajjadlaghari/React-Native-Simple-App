@@ -12,7 +12,10 @@ import { View, Text, Button, } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RootNavigation from './src/navigation/RootNavigation';
+import { configureStore } from './src/redux/configureStore';
+import {Provider} from 'react-redux';
 
+ 
 function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -27,6 +30,7 @@ function HomeScreen() {
 const Stack = createStackNavigator();
 // const Stack = createNativeStackNavigator();
 
+ const store=configureStore();
 function App() {
 
   const [isLoading, setLoading] = useState(true);
@@ -62,7 +66,10 @@ function App() {
     //  <Text>Hello</Text>
     //  <Button title='Click Me' onPress={display} />
     // </View>
-    <RootNavigation />
+    <Provider store={store}>
+      <RootNavigation />
+    </Provider>
+    
   );
 }
 
